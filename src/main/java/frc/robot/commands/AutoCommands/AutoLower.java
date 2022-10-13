@@ -2,27 +2,27 @@ package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Lifter;
 
-public class AutoDump extends CommandBase {
-    Indexer indexer;
+public class AutoLower extends CommandBase {
+    Lifter lifter;
     boolean finished;
     double seconds;
 
-    public final Timer timer;
+    Timer timer;
     
-    public AutoDump(Indexer i, double s) {
-        indexer = i;
+    public AutoLower(Lifter l, double s) {
+        lifter = l;
         seconds = s;
         timer = new Timer();
 
-        addRequirements(indexer);
+        addRequirements(lifter);
     }
 
     @Override
     public void initialize() {
         timer.start();
-        indexer.exhaust();
+        lifter.lower();
     }
 
     @Override
@@ -30,7 +30,7 @@ public class AutoDump extends CommandBase {
         if (timer.get() >= seconds) {
             finished = true;
         }
-        indexer.exhaust();
+        lifter.lower();
     }
 
     @Override

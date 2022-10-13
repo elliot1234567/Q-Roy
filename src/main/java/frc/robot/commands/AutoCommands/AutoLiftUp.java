@@ -1,16 +1,16 @@
 package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Lifter;
 
 public class AutoLiftUp extends CommandBase {
-    Indexer indexer;
+    Lifter lifter;
     boolean finished;
     
-    public AutoLiftUp(Indexer i) {
-        indexer = i;
+    public AutoLiftUp(Lifter l) {
+        lifter = l;
 
-        addRequirements(indexer);
+        addRequirements(lifter);
     }
 
     @Override
@@ -20,10 +20,7 @@ public class AutoLiftUp extends CommandBase {
 
     @Override
     public void execute() {
-        if (indexer.checkUpperLimit()) {
-            finished = true;
-        }
-        indexer.liftUp();
+        finished = lifter.lift();
     }
 
     @Override
